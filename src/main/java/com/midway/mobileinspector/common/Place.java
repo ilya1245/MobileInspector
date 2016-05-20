@@ -16,8 +16,10 @@ import java.util.Locale;
  */
 public class Place {
     private Location location;
-    private String provider;
-    private long locationTime;
+
+    public Place(Location location) {
+        this.location = location;
+    }
 
     public Address getAddress(){
         Geocoder gcd = new Geocoder(ControlService.getContext(), Locale.ENGLISH);
@@ -33,12 +35,6 @@ public class Place {
         }
         return null;
     }
-
-    public String  getCoordinates() {
-        return new StringBuilder(provider).append("[Latitude: ").append(location.getLatitude()).append("  Longitude: ").append(location.getLongitude()).append("]").toString();
-    }
-
-
 
     public String getStringAddress() {
         Address address = getAddress();
@@ -57,18 +53,15 @@ public class Place {
     }
 
     public String getProvider() {
-        return provider;
-    }
-
-    public void setProvider(String provider) {
-        this.provider = provider;
+        return location.getProvider();
     }
 
     public long getLocationTime() {
-        return locationTime;
+        return location.getTime();
     }
 
-    public void setLocationTime(long locationTime) {
-        this.locationTime = locationTime;
+    public float getAccuracy() {
+        return location.getAccuracy();
     }
+
 }

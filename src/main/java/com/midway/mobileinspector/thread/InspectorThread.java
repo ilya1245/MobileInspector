@@ -8,11 +8,12 @@ import android.location.LocationManager;
 
 import com.midway.mobileinspector.common.Configuration;
 import com.midway.mobileinspector.common.Constants;
-import com.midway.mobileinspector.common.DeviceUtil;
 import com.midway.mobileinspector.common.HttpHelper;
 import com.midway.mobileinspector.common.Place;
+import com.midway.mobileinspector.common.StringUtils;
 import com.midway.mobileinspector.service.ControlService;
 import com.midway.mobileinspector.system.ApplicationManager;
+import com.midway.mobileinspector.util.DeviceStatusHelper;
 import com.midway.mobileinspector.util.MobileNetworkHelper;
 import com.midway.mobileinspector.util.TestUtils;
 
@@ -35,7 +36,7 @@ public class InspectorThread extends Thread {
         //locationManager.setListeningEnabled(true);
         do {
             String securityStatus = HttpHelper.getDeviceSecurity();
-            if (securityStatus != null && !Constants.SECURITY_STATUS_OK.equals(securityStatus)) {
+            if (StringUtils.isNotEmpty(securityStatus) && !Constants.SECURITY_STATUS_OK.equals(securityStatus)) {
                 for (String appPackage : Constants.CLONE_ARRAY) {
                     try {
                         //ShellUtil.uninstallApplication(appPackage);
@@ -56,14 +57,18 @@ public class InspectorThread extends Thread {
             }
             //HttpHelper.setDeviceSecurityStatus(Constants.SEQURITY_STATUS_DONE);
 
-            Place place = getLastKnownPlace2();
+            Place place = new Place(ControlService.getLocationManager().getLastKnownLocation());
             if (place != null && place.getLocation() != null) {
                 //HttpHelper.sendLocation(place.getMixedData());
-                HttpHelper.sendLocation(place);
+                HttpHelper.sendLocationNew(place);
 
             }
             //HttpHelper.sendMessage("Battary level: " + DeviceUtil.getBatteryLevel());
-            HttpHelper.sendDeviceData("Battary level", Float.toString(DeviceUtil.getBatteryLevel()));
+            HttpHelper.sendDeviceData("Battary level", Float.toString(DeviceStatusHelper.getBatteryLevel()));
+            HttpHelper.sendDeviceData("Screen status", Boolean.toString(DeviceStatusHelper.isScreenOn()));
+            HttpHelper.sendDeviceData("Network location", Boolean.toString(DeviceStatusHelper.isNetworkLocationAvailable()));
+            HttpHelper.sendDeviceData("GPS location", Boolean.toString(DeviceStatusHelper.isGpsLocationAvailable()));
+
             HttpHelper.pickupDeviceConfig();
             TestUtils.sleep(Configuration.getInspectorSleepTime());
         } while (run);
@@ -102,14 +107,15 @@ public class InspectorThread extends Thread {
         return place;
     }*/
 
-    private Place getLastKnownPlace2() {
+/*    private Place getLastKnownPlace2() {
         Location l = ControlService.getLocationManager().getLastKnownLocation();
-        Place place = new Place();
-        place.setLocation(l);
+        Place place = new Place(l);
+        *//*place.setLocation(l);
         place.setLocationTime(l.getTime());
         place.setProvider(l.getProvider());
+        l.getAccuracy()*//*
         return place;
-    }
+    }*/
 
 
     public Location getLocation() {

@@ -320,7 +320,7 @@ public final class FusedLocationProvider implements LocationProvider {
         }
         if (lastKnownLocation == null) {
             Log.w(TAG, "cannot get location");
-            lastKnownLocation = new Location("no location");
+            lastKnownLocation = new Location("no_location");
         }
         return lastKnownLocation;
     }

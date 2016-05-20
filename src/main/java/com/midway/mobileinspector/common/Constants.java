@@ -45,6 +45,6 @@ public interface Constants {
 
     public static final String INSPECTOR = "inspector";
     public static final int LOCATION_TIME_ADVANCE = 30000;
-    public static final int INITIAL_CONFIG_ID = 1;
+    public static final int INITIAL_CONFIG_ID = 60;
 
 }

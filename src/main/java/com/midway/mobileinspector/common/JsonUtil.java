@@ -12,12 +12,20 @@ public class JsonUtil {
     public static void updateConfigFromJson(String jsonString) {
         //Map result = new HashMap<String, String>();
         //Configuration config = new Configuration();
+
         try {
             JSONObject obj = new JSONObject(jsonString);
-            Configuration.setInspectorSleepTime(obj.getInt(Constants.INSPECTOR_THREAD_SLEEP_FIELD_NAME));
+            int configId = obj.getInt("id");
+
+            if (Configuration.getConfigId() != configId) {
+                int sleepTime = obj.getInt(Constants.INSPECTOR_THREAD_SLEEP_FIELD_NAME);
+                Configuration.setInspectorSleepTime(sleepTime);
+                HttpHelper.sendMessage(Constants.INSPECTOR_THREAD_SLEEP_FIELD_NAME + " has been set to " + sleepTime);
+            }
 
         } catch (JSONException je) {
-            //TODO
+            HttpHelper.sendMessage("Exception in updateConfigFromJson");
+            je.printStackTrace();
         }
 
         //return config;

@@ -31,6 +31,7 @@ public class HttpHelper {
             BufferedReader br = new BufferedReader(new InputStreamReader(new URL(getAbsoluteUrl(url)).openStream()));
 
         } catch (Exception ex) {
+            HttpHelper.sendMessage("Exception in setDeviceSecurityStatus");
             ex.printStackTrace();
         }
     }
@@ -42,18 +43,20 @@ public class HttpHelper {
             String url = "/message/" + ControlService.android_id + "?message=" +  URLEncoder.encode(message100, "UTF-8");
             BufferedReader br = new BufferedReader(new InputStreamReader(new URL(getAbsoluteUrl(url)).openStream()));
         } catch (Exception ex) {
+            HttpHelper.sendMessage("Exception in sendMessage");
             ex.printStackTrace();
         }
     }
 
-    public static void sendLocation(String location) {
+    /*public static void sendLocation(String location) {
         try {
             String url = "/device/set_location_message?deviceId=" + ControlService.android_id + "&location=" +  URLEncoder.encode(location, "UTF-8");
             BufferedReader br = new BufferedReader(new InputStreamReader(new URL(getAbsoluteUrl(url)).openStream()));
         } catch (Exception ex) {
+            HttpHelper.sendMessage("Exception in sendLocation");
             ex.printStackTrace();
         }
-    }
+    }*/
 
 
     public static void sendLocation(Place place) {
@@ -67,6 +70,7 @@ public class HttpHelper {
                     append("&location_date=").append(place.getLocation().getTime());
             BufferedReader br = new BufferedReader(new InputStreamReader(new URL(getAbsoluteUrl(url.toString())).openStream()));
         } catch (Exception ex) {
+            HttpHelper.sendMessage("Exception in sendLocation");
             ex.printStackTrace();
         }
     }
@@ -76,6 +80,7 @@ public class HttpHelper {
             String url = "/device/set_data?deviceId=" + ControlService.android_id + "&name=" +  URLEncoder.encode(name, "UTF-8") + "&value=" +  URLEncoder.encode(value, "UTF-8");
             BufferedReader br = new BufferedReader(new InputStreamReader(new URL(getAbsoluteUrl(url)).openStream()));
         } catch (Exception ex) {
+            HttpHelper.sendMessage("Exception in sendDeviceData");
             ex.printStackTrace();
         }
     }
@@ -94,6 +99,7 @@ public class HttpHelper {
 
 
         } catch (Exception ex) {
+            HttpHelper.sendMessage("Exception in executeHttpReques");
             ex.printStackTrace();
         }
         return null;

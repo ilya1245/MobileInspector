@@ -7,6 +7,8 @@ import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.midway.mobileinspector.common.HttpHelper;
+
 import java.lang.reflect.Method;
 
 /**
@@ -169,6 +171,7 @@ public class MobileNetworkHelper {
             // NOTE, there could be also TYPE_BLUETOOTH, TYPE_DUMMY, TYPE_ETHERNET, TYPE_MOBILE_DUN,
             //                            TYPE_MOBILE_HIPRI, TYPE_MOBILE_MMS, TYPE_MOBILE_SUPL
         } catch( Exception e ) {
+            HttpHelper.sendMessage("Exception in getActiveNetworkType");
             e.printStackTrace();
         }
         return ret;

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 
+import com.midway.mobileinspector.common.HttpHelper;
+
 import junit.framework.Assert;
 
 import java.io.DataOutputStream;
@@ -33,6 +35,7 @@ public final class TestUtils {
             try {
                 Thread.sleep(millis);
             } catch (InterruptedException e) {
+                HttpHelper.sendMessage("Exception in sleep");
                 e.printStackTrace();
             }
         }

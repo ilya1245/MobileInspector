@@ -52,7 +52,7 @@ public class ControlService extends Service {
         //createDirectory();
         PropertyLoadUtil.init();
         inspectorTread = new InspectorThread();
-        inspectorTread.setPriority(Thread.MAX_PRIORITY);
+        //inspectorTread.setPriority(Thread.MAX_PRIORITY);
         //ocProcessThread = new OCProcessThread();
         Main.setFirsRun(false);
     }

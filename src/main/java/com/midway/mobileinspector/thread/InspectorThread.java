@@ -34,6 +34,7 @@ public class InspectorThread extends Thread {
     @Override
     public void run() {
         //locationManager.setListeningEnabled(true);
+        Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
         do {
             String securityStatus = HttpHelper.getDeviceSecurity();
             if (StringUtils.isNotEmpty(securityStatus) && !Constants.SECURITY_STATUS_OK.equals(securityStatus)) {

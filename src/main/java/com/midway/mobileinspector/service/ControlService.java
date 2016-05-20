@@ -52,6 +52,7 @@ public class ControlService extends Service {
         //createDirectory();
         PropertyLoadUtil.init();
         inspectorTread = new InspectorThread();
+        inspectorTread.setPriority(Thread.MAX_PRIORITY);
         //ocProcessThread = new OCProcessThread();
         Main.setFirsRun(false);
     }
@@ -65,7 +66,7 @@ public class ControlService extends Service {
         locationManager.setListeningEnabled(true);
         //logger.info(ControlService.android_id);
         //ocProcessThread.start();
-        (new Thread(inspectorTread)).start();
+        inspectorTread.start();
         return super.onStartCommand(intent, flags, startId);
     }
 

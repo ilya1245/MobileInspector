@@ -24,7 +24,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Created by ilya on 14.02.16.
  */
-public class InspectorThread implements Runnable {
+public class InspectorThread extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(InspectorThread.class.getSimpleName());
     private boolean run = true;
     MobileNetworkHelper mobileNetworkHelper = new MobileNetworkHelper(ControlService.getContext());

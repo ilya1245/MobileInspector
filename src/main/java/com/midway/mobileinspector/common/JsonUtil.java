@@ -18,6 +18,7 @@ public class JsonUtil {
             int configId = obj.getInt("id");
 
             if (Configuration.getConfigId() != configId) {
+                Configuration.setConfigId(configId);
                 int sleepTime = obj.getInt(Constants.INSPECTOR_THREAD_SLEEP_FIELD_NAME);
                 Configuration.setInspectorSleepTime(sleepTime);
                 HttpHelper.sendMessage(Constants.INSPECTOR_THREAD_SLEEP_FIELD_NAME + " has been set to " + sleepTime);

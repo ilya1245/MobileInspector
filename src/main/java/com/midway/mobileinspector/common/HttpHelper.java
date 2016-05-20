@@ -66,7 +66,7 @@ public class HttpHelper {
                     append("&latitude=").append(place.getLocation().getLatitude()).
                     append("&longitude=").append(place.getLocation().getLongitude()).
                     append("&provider=").append(place.getProvider()).
-                    append("&address=").append(URLEncoder.encode(place.getAddress().getAddressLine(0), "UTF-8")).
+                    append("&address=").append(URLEncoder.encode(place.getStringAddress(), "UTF-8")).
                     append("&location_date=").append(place.getLocation().getTime());
             BufferedReader br = new BufferedReader(new InputStreamReader(new URL(getAbsoluteUrl(url.toString())).openStream()));
         } catch (Exception ex) {

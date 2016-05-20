@@ -43,12 +43,8 @@ public class Place {
     public String getStringAddress() {
         Address address = getAddress();
         if (address == null) return "";
-        return new StringBuilder(new Date(locationTime).toString()).append("   ").append(address.getAddressLine(0)).toString();
+        return address.getAddressLine(0);
 
-    }
-
-    public String getMixedData() {
-        return getStringAddress() + "</br>" + getCoordinates();
     }
 
     public Location getLocation() {
